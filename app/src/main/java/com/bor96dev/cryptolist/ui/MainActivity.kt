@@ -1,4 +1,4 @@
-package com.bor96dev.cryptolist
+package com.bor96dev.cryptolist.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
