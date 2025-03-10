@@ -18,14 +18,15 @@ class CoinListViewModel @Inject constructor(
     private val _state = MutableStateFlow<CoinListState>(CoinListState.Loading)
     val state: StateFlow<CoinListState> = _state.asStateFlow()
 
-    private var currentCurrency = "usd"
+    private val _currentCurrency = MutableStateFlow("usd")
+    val currentCurrency: StateFlow<String> = _currentCurrency.asStateFlow()
 
     init {
         loadCoins()
     }
 
     fun onCurrencyChanged(currency: String){
-        currentCurrency = currency
+        _currentCurrency.value = currency
         loadCoins()
     }
 
