@@ -11,7 +11,7 @@ data class CoinMarket(
     @SerializedName("current_price") val current_price: Double
 )
 
-data class CointDetails(
+data class CoinDetails(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String,
     @SerializedName("image") val image: Image,

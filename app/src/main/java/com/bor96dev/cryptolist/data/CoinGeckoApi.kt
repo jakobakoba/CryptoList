@@ -1,5 +1,7 @@
 package com.bor96dev.cryptolist.data
 
+import com.bor96dev.cryptolist.domain.CoinDetails
+import com.bor96dev.cryptolist.domain.CoinMarket
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
