@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.bor96dev.cryptolist.data.Result
 
 @HiltViewModel
 class CoinListViewModel @Inject constructor(
@@ -33,9 +34,9 @@ class CoinListViewModel @Inject constructor(
     private fun loadCoins(){
         viewModelScope.launch{
             _state.value = CoinListState.Loading
-            when(val result = repository.getCoinMarkets(currentCurrency)){
+            when(val result = repository.getCoinMarkets(_currentCurrency.value)){
                 is Result.Success -> _state.value = CoinListState.Success(result.data)
-                is Result.Failure -> state.value = CoinListState.Error(result.exception.message ?: "Error")
+                is Result.Failure -> _state.value = CoinListState.Error(result.exception.message ?: "Error")
             }
         }
     }

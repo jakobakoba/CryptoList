@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
 import com.bor96dev.cryptolist.R
 import com.bor96dev.cryptolist.domain.CoinMarket
 
@@ -106,9 +107,11 @@ fun CoinItem(
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ){
-        Box(modifier = Modifier.size(40.dp)){
-            Text(text = coin.symbol)
-        }
+        AsyncImage(
+            model = coin.image,
+            contentDescription = coin.name,
+            modifier = Modifier.size(40.dp)
+        )
         Text(
             text = coin.name,
             modifier = Modifier.padding(start = 16.dp)

@@ -9,17 +9,17 @@ class CoinRepository @Inject constructor(
 ){
     suspend fun getCoinMarkets(currency: String): Result<List<CoinMarket>> {
         return try{
-            Result.success(api.getCoinMarkets(currency))
+            Result.Success(api.getCoinMarkets(currency))
         } catch(e: Exception){
-            Result.failure(e)
+            Result.Failure(e)
         }
     }
 
     suspend fun getCoinDetails(id: String): Result<CoinDetails> {
         return try {
-            Result.success(api.getCoinDetails(id))
+            Result.Success(api.getCoinDetails(id))
         } catch(e: Exception) {
-            Result.failure(e)
+            Result.Failure(e)
         }
     }
 
