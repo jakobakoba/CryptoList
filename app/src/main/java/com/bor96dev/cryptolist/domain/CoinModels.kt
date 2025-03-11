@@ -1,6 +1,5 @@
 package com.bor96dev.cryptolist.domain
 
-import android.media.Image
 import com.google.gson.annotations.SerializedName
 
 data class CoinMarket(
