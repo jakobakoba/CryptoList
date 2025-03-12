@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier.fillMaxSize()
                         )
                     }
-                    composable("coin_details{coinId}") { backStackEntry ->
+                    composable("coin_details/{coinId}") { backStackEntry ->
                         val coinId = backStackEntry.arguments?.getString("coinId") ?: ""
                         CoinDetailsScreen(
                             coinId = coinId,
