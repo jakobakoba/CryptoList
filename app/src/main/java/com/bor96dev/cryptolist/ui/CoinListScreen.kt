@@ -34,6 +34,7 @@ import com.bor96dev.cryptolist.domain.CoinMarket
 fun CoinListScreen(
     viewModel: CoinListViewModel = hiltViewModel(),
     onCoinClick: (String) -> Unit,
+    modifier: Modifier
 ) {
     val state by viewModel.state.collectAsState()
     val currentCurrency by viewModel.currentCurrency.collectAsState()
