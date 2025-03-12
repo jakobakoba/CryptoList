@@ -34,7 +34,6 @@ import com.bor96dev.cryptolist.domain.CoinMarket
 fun CoinListScreen(
     viewModel: CoinListViewModel = hiltViewModel(),
     onCoinClick: (String) -> Unit,
-    modifier: Modifier = Modifier
 ) {
     val state by viewModel.state.collectAsState()
     val currentCurrency by viewModel.currentCurrency.collectAsState()
@@ -65,7 +64,7 @@ fun CoinListScreen(
                 )
             }
 
-            when(state){
+            when (val screenState = state) {
                 is CoinListState.Loading -> {
                     Box(
                         modifier = Modifier.fillMaxSize(),
@@ -76,7 +75,7 @@ fun CoinListScreen(
                 }
                 is CoinListState.Success -> {
                     LazyColumn {
-                        items((state as CoinListState.Success).coins) {coin ->
+                        items(screenState.coins) { coin ->
                             CoinItem(
                                 coin = coin,
                                 onClick = {onCoinClick(coin.id)}
@@ -98,7 +97,7 @@ fun CoinListScreen(
 fun CoinItem(
     coin: CoinMarket,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier) {
+) {
 
     Row (
         modifier = Modifier
