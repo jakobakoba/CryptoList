@@ -7,7 +7,8 @@ data class CoinMarket(
     @SerializedName("symbol") val symbol: String,
     @SerializedName("name") val name: String,
     @SerializedName("image") val image: String,
-    @SerializedName("current_price") val current_price: Double
+    @SerializedName("current_price") val current_price: Double,
+    @SerializedName("price_change_percentage_24h") val price_change: Double
 )
 
 data class CoinDetails(

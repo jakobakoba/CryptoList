@@ -22,12 +22,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.bor96dev.cryptolist.R
 import com.bor96dev.cryptolist.domain.CoinMarket
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -79,6 +81,7 @@ fun CoinListScreen(
                         items(screenState.coins) { coin ->
                             CoinItem(
                                 coin = coin,
+                                currentCurrency = currentCurrency,
                                 onClick = {onCoinClick(coin.id)}
                             )
                         }
@@ -97,6 +100,7 @@ fun CoinListScreen(
 @Composable
 fun CoinItem(
     coin: CoinMarket,
+    currentCurrency: String,
     onClick: () -> Unit,
 ) {
 
@@ -112,16 +116,39 @@ fun CoinItem(
             contentDescription = coin.name,
             modifier = Modifier.size(40.dp)
         )
-        Text(
-            text = coin.name,
-            modifier = Modifier.padding(start = 16.dp)
-        )
-        Text(
-            text = "${coin.current_price} ${coin.symbol.uppercase()}",
-            modifier = Modifier.padding(start = 16.dp)
-        )
-
+        Column(
+            modifier = Modifier
+                .padding(start = 16.dp)
+        ){
+            Text(
+                text = coin.name,
+            )
+            Text(
+                text = coin.symbol.uppercase(),
+            )
+        }
+        Column(
+            modifier = Modifier
+                .padding(start = 16.dp)
+                .weight(1f)
+                .align(Alignment.CenterVertically),
+            horizontalAlignment = Alignment.End
+        ){
+            val currencySymbol = if (currentCurrency == "usd") "$" else "₽"
+            val formattedPrice = String.format(Locale.US, "%,.2f", coin.current_price)
+            Text(
+                text = "$currencySymbol $formattedPrice"
+            )
+            val priceChangeValue = coin.price_change
+            val formattedChange = String.format(Locale.US, "%+.2f%%", priceChangeValue)
+            Text(
+                text = formattedChange,
+                color = when {
+                    priceChangeValue >= 0 -> Color.Green
+                    priceChangeValue < 0 -> Color.Red
+                    else -> Color.Black
+                }
+            )
+        }
     }
-
-    
 }
