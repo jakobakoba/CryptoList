@@ -29,6 +29,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.bor96dev.cryptolist.R
 import com.bor96dev.cryptolist.domain.CoinMarket
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -134,12 +135,14 @@ fun CoinItem(
             horizontalAlignment = Alignment.End
         ){
             val currencySymbol = if (currentCurrency == "usd") "$" else "₽"
+            val formattedPrice = String.format(Locale.US, "%,.2f", coin.current_price)
             Text(
-                text = "$currencySymbol ${String.format("%.2f", coin.current_price)}"
+                text = "$currencySymbol $formattedPrice"
             )
             val priceChangeValue = coin.price_change
+            val formattedChange = String.format(Locale.US, "%+.2f%%", priceChangeValue)
             Text(
-                text = String.format("%+.2f", coin.price_change),
+                text = formattedChange,
                 color = when {
                     priceChangeValue >= 0 -> Color.Green
                     priceChangeValue < 0 -> Color.Red
