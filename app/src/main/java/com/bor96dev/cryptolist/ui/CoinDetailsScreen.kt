@@ -72,7 +72,7 @@ fun CoinDetailsScreen(
             }
 
             is CoinDetailsState.Success -> {
-                val coin = (currentState as CoinDetailsState.Success).coin
+                val coin = currentState.coin
                 Column(
                     modifier = Modifier
                         .padding(padding)
